@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <div th:replace="fragments/config :: config"></div>
+</head>
+
+<body>
+  <div th:replace="fragments/header :: cabecalho"></div>
+
+  <div class="container">
+    <div class="col">
+      <h2>Atualização de Aluno</h2>
+      <div th:if="${mensagem}" class="alert alert-success alert-dismissible fade show" role="alert">
+        <span th:text="${mensagem}"></span>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      <form th:action="@{/aluno/salvar}" th:object="${aluno}" method="post">
+        <input type="hidden" th:field="*{id}">
+        <div class="card">
+          <div class="card-header">
+            Dados Pessoais
+          </div>
+            <div class="card_body mt-3">
+              <div class="container">
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Nome</label>
+                  <div class="col-sm-5">
+                    <input th:field="*{nome}" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Matricula</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{matricula}" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('matricula')}" th:errors="*{matricula}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Email</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{email}" type="email" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">CPF</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{cpf}" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+          <div class="card mt-3">
+          <div class="card-header">
+            Endereço
+          </div>
+            <div class="card_body mt-3">
+              <div class="container">
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">CEP</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.cep}" th:id="cep" onblur="pesquisacep(this.value);" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.cep')}" th:errors="*{endereco.cep}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Logradouro</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.logradouro}" th:id="logradouro" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.logradouro')}" th:errors="*{endereco.logradouro}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Compl.</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.complemento}" th:id="complemento" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.complemento')}" th:errors="*{endereco.complemento}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Bairro</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.bairro}" th:id="bairro" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.bairro')}" th:errors="*{endereco.bairro}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">Cidade</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.cidade}" th:id="cidade" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.cidade')}" th:errors="*{endereco.cidade}"></span>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label class="col-sm-1 col-form-label">UF</label>
+                  <div class="col-sm-3">
+                    <input th:field="*{endereco.uf}" th:id="uf" type="text" class="form-control">
+                  </div>
+                  <div class="col-sm-5">
+                    <span class="mensagem" th:if="${#fields.hasErrors('endereco.uf')}" th:errors="*{endereco.uf}"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Atualizar</button>
+        <a th:href="@{/aluno}" class="btn btn-secondary mt-3">Listagem</a>
+      </form>
+    </div>
+    
+    <div th:replace="fragments/footer :: rodape"></div>
+  </div>
+
+  
+</body>
+
+</html>
