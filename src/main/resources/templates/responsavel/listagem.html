@@ -17,7 +17,7 @@
             <div class="row mb-3">
                 <!-- Pesquisar -->
                 <div class="col-sm-6">
-                    <form th:action="@{/professor/buscar}" method="post">
+                    <form th:action="@{/responsavel/buscar}" method="post">
                         <div class="input-group">
                             <input type="text" class="form-control" name="nome"/>
                             <button class="btn btn-primary" type="submit" value="Buscar">
@@ -29,7 +29,7 @@
                 </div>
                 <!-- Botão Cadastrar -->
                 <div class="col-sm-6">
-                    <a style="float: right" th:href="@{/professor/novo}" class="btn btn-success">
+                    <a style="float: right" th:href="@{/responsavel/novo}" class="btn btn-success">
                         Cadastrar <i class="fa-solid fa-floppy-disk"></i>
                     </a>
                 </div>
@@ -37,7 +37,7 @@
 
             <div class="row">
                 <div class="col-sm-12">
-                    <h2>Cadastro de <b>Professores</b></h2>
+                    <h2>Cadastro de <b>Responsáveis</b></h2>
                 </div>
             </div>
 
@@ -52,24 +52,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:if="${professores.empty}">
+                <tr th:if="${responsáveis.empty}">
                     <td colspan="2">Sem Professores</td>
                 </tr>
-                <tr th:each="professor : ${professores}">
-                    <td><span th:text="${professor.id}"> Id </span></td>
-                    <td><span th:text="${professor.nome}"> Nome </span></td>
-                    <td><span th:text="${professor.email}"> Email </span></td>
-                    <td><span th:text="${professor.cpf}"> CPF </span></td>
+                <tr th:each="responsavel : ${responsáveis}">
+                    <td><span th:text="${responsavel.id}"> Id </span></td>
+                    <td><span th:text="${responsavel.nome}"> Nome </span></td>
+                    <td><span th:text="${responsavel.email}"> Email </span></td>
+                    <td><span th:text="${responsavel.cpf}"> CPF </span></td>
                     <td>
                         <a class="btn btn-outline-danger btn-sm"
-                           th:href="@{/professor/excluir/{id}(id=${professor.id})}"
-                           th:data-confirm-delete="|Você gostaria de apagar ${professor.nome}?|"
+                           th:href="@{/responsavel/excluir/{id}(id=${responsavel.id})}"
+                           th:data-confirm-delete="|Você gostaria de apagar ${responsavel.nome}?|"
                            onclick="if (!confirm(this.getAttribute('data-confirm-delete'))) return false">
                             Apagar
                         </a>
 
                         <a class="btn btn-outline-primary btn-sm"
-                           th:href="@{/professor/alterar/{id}(id=${professor.id})}">Editar
+                           th:href="@{/responsavel/alterar/{id}(id=${responsavel.id})}">Editar
                         </a>
 
                     </td>

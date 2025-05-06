@@ -12,6 +12,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.sql.Date;
 import java.time.Instant;
+import java.time.LocalDate;
+import java.util.List;
 
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(
@@ -42,7 +44,7 @@ public class Pessoa {
 
     @Basic
     @Temporal(TemporalType.DATE)
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
 
     @CreationTimestamp(source = SourceType.DB)
     private Instant dataCadastro;
@@ -52,4 +54,7 @@ public class Pessoa {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Endereco endereco;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Telefone> telefones;
 }
